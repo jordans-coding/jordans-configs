@@ -97,7 +97,7 @@ require("ibl").setup()
 require('lualine').setup()
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -220,6 +220,13 @@ vim.o.mouse = 'a'
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
+-- Automatically update buffer if changes from outside nivm
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({"FocusGained", "BufEnter"}, {
+    pattern = "*",
+    command = "checktime"
+})
+
 -- Enable break indent
 vim.o.breakindent = true
 vim.o.autoindent = true
@@ -244,4 +251,4 @@ vim.o.termguicolors = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 
-vim.g.python3_host_prog = '/home/jrobey/.pyenv/versions/nvim/bin/python'
+
